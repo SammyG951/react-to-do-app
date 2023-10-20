@@ -73,6 +73,10 @@ form.create-task button {
     outline: none;
 }
 
+form.create-task button:hover {
+    background-color: #407363;
+}
+
 .task-card {
     position: relative;
     width: 480px;
@@ -93,7 +97,7 @@ form.create-task button {
 
 }
 
-.delete-btn {
+.delete button{
     background-color: #F15A59;
     color: #F6FBF4;
     display: block;
@@ -104,4 +108,13 @@ form.create-task button {
     height: 40px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+}
+
+.delete button:hover {
+    background-color: #CF4C4C;
+}
+
+.delete button * {
+    display: block;
+    margin: 0 auto;
 }
