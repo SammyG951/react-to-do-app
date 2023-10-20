@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
+import Zoom from "@mui/material/Zoom";
 
 function CreateTask(props) {
     const [task, setTask] = useState({
         text: "",
         isComplete: false
     });
+
+    const [isZoom, setZoom] = useState(false);
 
     function handleChange(event){
         const name = event.target.value;
@@ -14,13 +19,16 @@ function CreateTask(props) {
     }
 
     function submitTask(event) {
-        console.log(task);
         props.onAdd(task);
+        setZoom(true);
         setTask(() => {
            return {
             text: ""
            };
         });
+        setTimeout(() => {
+            setZoom(false);
+        }, 75);
         event.preventDefault();
     }
 
@@ -33,9 +41,11 @@ function CreateTask(props) {
                     onChange={handleChange}
                     value={task.text}
                 />
-                <button 
-                    onClick={submitTask}
-                >Add</button>
+                <Zoom in={isZoom ? false : true}>
+                    <Fab onClick={submitTask}>
+                        <AddIcon />
+                    </Fab>
+                </Zoom>
             </form>
         </div>
     );

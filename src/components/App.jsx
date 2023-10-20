@@ -3,9 +3,13 @@ import Header from "./partials/Header.jsx";
 import Footer from "./partials/Footer.jsx";
 import CreateTask from "./partials/CreateTask.jsx";
 import Task from "./partials/Task.jsx";
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import Fab from '@mui/material/Fab';
+import Zoom from "@mui/material/Zoom";
 
 function App() {
     const [tasks, setTasks] = useState([]);
+    const [isZoom, setZoom] = useState(false);
 
     function addTask(newNote){
         console.log(newNote);
@@ -26,12 +30,15 @@ function App() {
     }
 
     function deleteTasks(){
+        setZoom(true);
         setTasks((prevTasks) => {
             return prevTasks.filter((taskItem) => {
                 return !taskItem.isComplete
             })
         });
-        console.log(tasks);
+        setTimeout(() => {
+            setZoom(false);
+        }, 75);
     }
 
     return (
@@ -55,10 +62,16 @@ function App() {
                         );
                     })}
                     </ul>
-                    <button 
-                        onClick={deleteTasks}
-                        className="delete-btn"
-                    >Delete</button>
+                    <div className="delete">
+                        <Zoom in={isZoom ? false : true}>
+                            <Fab 
+                                onClick={deleteTasks}
+                                variant="extended"
+                            >
+                                <DeleteSweepIcon />
+                            </Fab>
+                        </Zoom>
+                    </div>
                 </div>
             )}
             <Footer />
